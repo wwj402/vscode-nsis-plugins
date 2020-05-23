@@ -1,0 +1,169 @@
+{
+  "ProcFunc": {
+    "body": "!include \"${1:ProcFunc.nsh}\"",
+    "description": "Usage: !include \"ProcFunc.nsh\"",
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "ProcFunc"
+  },
+  "${GetProcessPID}": {
+    "body": "\\${GetProcessPID} \"${1:[process]}\" $${2:var}",
+    "description": ["Usage: ${GetProcessPID} \"[process]\" $var",
+      "[process]\t; Name or PID",
+      "$var(output)\t; -2 - CreateToolhelp32Snapshot failed",
+      "; 0 - process does not exist",
+      "; >0 - PID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "GetProcessPID"
+  },
+  "${GetProcessPath}": {
+    "body": "\\${GetProcessPath} \"${1:[process]}\" $${2:var}",
+    "description": ["Usage: ${GetProcessPath} \"[process]\" $var",
+      "[process]\t; Name or PID",
+      "$var(output)\t; -2 - CreateToolhelp32Snapshot failed",
+      "; -1 - OpenProcess failed",
+      "; 0 - process does not exist",
+      "; Or path to process"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "GetProcessPath"
+  },
+  "${GetProcessParent}": {
+    "body": "\\${GetProcessParent} \"${1:[process]}\" $${2:var}",
+    "description": ["Usage: ${GetProcessParent} \"[process]\" $var",
+      "[process]\t; Name or PID",
+      "$var(output)\t; -2 - CreateToolhelp32Snapshot failed",
+      "; 0 - process does not exist",
+      "; Or PPID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "GetProcessParent"
+  },
+  "${GetProcessName}": {
+    "body": "\\${GetProcessName} \"${1:[PID]}\" $${2:var}",
+    "description": ["Usage: ${GetProcessName} \"[process]\" $var",
+      "[PID]\t; PID",
+      "$var(output)\t; -2 - CreateToolhelp32Snapshot failed",
+      "; 0 - process does not exist",
+      "; Or process name"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "GetProcessName"
+  },
+  "${EnumProcessPaths}": {
+    "body": ["\\${EnumProcessPaths} \"${1:Function}\" $${2:var}",
+    "Function \"$1\"",
+    "\tPop \\$var1\t\t; matching path string",
+    "\tPop \\$var2\t\t; matching process PID",
+    "\t...user commands",
+    "\tPush [1/0]\t\t; must return 1 on the stack to continue",
+    "\t\t\t\t\t; must return some value otherwise corrupt the stack",
+    "\t\t\t\t\t; DO NOT save data in \\$0-\\$9",
+    "FunctionEnd"
+  ],
+    "description": ["Usage: ${EnumProcessPaths} \"Function\" $var",
+      "Function\t; Callback function",
+      "$var(output)\t; -2 - EnumProcesses failed",
+      "; 1 - success"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "EnumProcessPaths"
+  },
+  "${ProcessWait}": {
+    "body": "\\${ProcessWait} \"${1:[process]}\" \"${2:[timeout]}\" $${3:var}",
+    "description": ["Usage: ${ProcessWait} \"[process]\" \"[timeout]\" $var",
+      "[process]\t; Name",
+      "[timeout]\t; -1 - do not timeout",
+      "; >0 - timeout in milliseconds",
+      "$var(output)\t; -2 - CreateToolhelp32Snapshot failed",
+      "; -1 - operation timed out",
+      "; Or PID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "ProcessWait"
+  },
+  "${ProcessWait2}": {
+    "body": "\\${ProcessWait2} \"${1:[process]}\" \"${2:[timeout]}\" $${3:var}",
+    "description": ["Usage: ${ProcessWait2} \"[process]\" \"[timeout]\" $var",
+      "[process]\t; Name",
+      "[timeout]\t; -1 - do not timeout",
+      "; >0 - timeout in milliseconds",
+      "$var(output)\t; -1 - operation timed out",
+      "; Or PID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "ProcessWait2"
+  },
+  "${ProcessWaitClose}": {
+    "body": "\\${ProcessWaitClose} \"${1:[process]}\" \"${2:[timeout]}\" $${3:var}",
+    "description": ["Usage: ${ProcessWaitClose} \"[process]\" \"[timeout]\" $var",
+      "[process]\t; Name",
+      "[timeout]\t; -1 - do not timeout",
+      "; >0 - timeout in milliseconds",
+      "$var(output)\t; -1 - operation timed out",
+      ";  0 - process does not exist",
+      "; Or PID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "ProcessWaitClose"
+  },
+  "${CloseProcess}": {
+    "body": "\\${CloseProcess} \"${1:[process]}\" $${2:var}",
+    "description": ["Usage: ${CloseProcess} \"[process]\" $var",
+      "[process]\t; Name or PID",
+      "$var(output)\t; 0 - process does not exist",
+      "; Or PID of ended process"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "CloseProcess"
+  },
+  "${TerminateProcess}": {
+    "body": "\\${TerminateProcess} \"${1:[process]}\" $${2:var}",
+    "description": ["Usage: ${TerminateProcess} \"[process]\" $var",
+      "[process]\t; Name or PID",
+      "$var(output)\t; -1 - operation failed",
+      "; 0 - process does not exist",
+      "; Or PID of ended process"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "TerminateProcess"
+  },
+  "${Execute}": {
+    "body": "\\${Execute} \"${1:[[command]]}\" \"${2:[[working_dir]]}\" $${3:var}",
+    "description": ["Usage: ${Execute} \"[command]\" \"[working_dir]\" $var",
+      "[command]\t; '\"X:\\path\\to\\prog.exe\" arg1 arg2 \"arg3 with space\"'",
+      "[working_dir]\t; Working directory (\"X:\\path\\to\\dir\") or nothing (\"\")",
+      "$var(output)\t; 0 - failed to create process",
+      "; Or PID"
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": "Execute"
+  },
+  "${ProcessExists}": {
+    "body": ["${1|${If},${IfNot},${Unless}|} \\${ProcessExists} \"${2:[process]}\"",
+    "\t$0",
+    "\\${EndIf}"
+    ],
+    "description": ["Usage: ${ProcessExists} \"[process]\"",
+      "[process]\t; Name or PID",
+      "Use with a LogicLib conditional command like If or Unless.",
+      "Evaluates to true if the process exists",
+      "or false if it does not or the CreateToolhelp32Snapshot fails."
+    ],
+    "descriptionMoreURL": "https://portableapps.com/node/12561",
+    "leftLabelHTML": "<span class='support class'>ProcFunc.nsh</span>",
+    "prefix": ["ProcessExists", "If ProcessExists", "Unless ProcessExists"]
+  }
+}

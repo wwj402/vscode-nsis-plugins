@@ -1,0 +1,105 @@
+{
+  "servicelib": {
+    "body": "!include \"${1:servicelib.nsh}\"",
+    "description": ["Usage: Method 1:",
+      "\tPush \"action\"",
+      "\tPush \"name\"",
+      "\tPush \"param\"",
+      "\tCall Service",
+      "\tPop $0 ;response",
+      "Usage: Method 2:",
+      "\t!insertmacro SERVICE \"action\" \"name\" \"param\""
+    ],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "servicelib"
+  },
+  "service-create-macro": {
+    "body": ["!insertmacro SERVICE \"create\" \"${1:name}\" \\",
+      "\t\"path=${2:X:\\path\\to\\prog.exe};starttype=\\${${3|SERVICE_AUTO_START,SERVICE_BOOT_START,SERVICE_SYSTEM_START,SERVICE_DEMAND_START,SERVICE_DISABLED|}};servicetype=\\${${4|SERVICE_WIN32_OWN_PROCESS,SERVICE_KERNEL_DRIVER,SERVICE_FILE_SYSTEM_DRIVER,SERVICE_WIN32_SHARE_PROCESS,SERVICE_INTERACTIVE_PROCESS|}};display=${5:display name};\""
+    ],
+    "description": ["Actions: create - creates a new windows service",
+      "Parameters:",
+      "path - path to service executable",
+      "autostart - automatically start with system ie. 1|0",
+      "interact - interact with the desktop ie. 1|0",
+      "depend - service dependencies",
+      "user - user that runs the service",
+      "password - password of the above user",
+      "display - display name in service's console",
+      "description - Description of service",
+      "starttype - start type (supersedes autostart)",
+      "servicetype - service type (supersedes interact)"
+    ],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-create"
+  },
+  "service-delete-macro": {
+    "body": ["!insertmacro SERVICE \"delete\" \"${1:name}\" \"\""],
+    "description": ["Actions: delete - deletes a windows service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-delete"
+  },
+  "service-start-macro": {
+    "body": ["!insertmacro SERVICE \"start\" \"${1:name}\" \"\""],
+    "description": ["Actions: start - start a stopped windows service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-start"
+  },
+  "service-stop-macro": {
+    "body": ["!insertmacro SERVICE \"stop\" \"${1:name}\" \"\""],
+    "description": ["Actions: stop - stops a running windows service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-stop"
+  },
+  "service-pause-macro": {
+    "body": ["!insertmacro SERVICE \"pause\" \"${1:name}\" \"\""],
+    "description": ["Actions: pause - pauses a running windows service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-pause"
+  },
+  "service-continue-macro": {
+    "body": ["!insertmacro SERVICE \"continue\" \"${1:name}\" \"\""],
+    "description": ["Actions: continue - continues a paused windows service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-continue"
+  },
+  "service-installed-macro": {
+    "body": ["!insertmacro SERVICE \"installed\" \"${1:name}\" \"${2|start,stop,pause,continue,delete|}\""],
+    "description": ["Actions: installed  - is the provided service installed",
+      "Parameters:",
+      "action - if true then invokes the specified action"
+    ],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-installed"
+  },
+  "service-running-macro": {
+    "body": ["!insertmacro SERVICE \"running\" \"${1:name}\" \"${2|stop,pause|}\""],
+    "description": ["Actions: running - is the provided service running",
+      "Parameters:",
+      "action - if true then invokes the specified action"
+    ],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-running"
+  },
+  "service-status-macro": {
+    "body": ["!insertmacro SERVICE \"status\" \"${1:name}\" \"\"",
+      "Pop ${2:\\$0}",
+      "\\${If} $2 == \"${3|running,stopped,start_pending,stop_pending,continue_pending,pause_pending,paused,unknown,false|}\"",
+      "\t$0",
+      "\\${EndIf}"
+    ],
+    "description": ["Actions: status - check the status of the provided service"],
+    "descriptionMoreURL": "https://nsis.sourceforge.io/NSIS_Service_Lib",
+    "leftLabelHTML": "<span class='support class'>servicelib.nsh</span>",
+    "prefix": "service-status"
+  }
+}
